@@ -17,6 +17,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->singleton(LaravelTracer::class, function () {
             $tracer = new LaravelTracer();
 
+            if (config('laraveltracer.rootName')) {
+                $tracer->setRootName(config('laraveltracer.rootName'));
+            }
+
             if (config('laraveltracer.honeycomb.key')) {
                 $tracer->registerTransport(
                     new HoneycombTransport(
