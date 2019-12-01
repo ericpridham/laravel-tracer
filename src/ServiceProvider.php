@@ -24,6 +24,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                     )
                 );
             }
+
+            return $tracer;
         });
     }
 
