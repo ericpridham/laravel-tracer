@@ -1,0 +1,42 @@
+{
+    "name": "ericpridham/laravel-tracing",
+    "description": "Easily instrument a Laravel project.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Eric Pridham",
+            "email": "eric.pridham@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ericpridham/opentracing-client"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ericpridham/opentracing-client": "dev-master",
+        "opentracing/opentracing": "^1",
+        "laravel/framework": "^6"
+    },
+    "autoload": {
+        "psr-4": {
+            "EricPridham\\LaravelTracing\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EricPridham\\LaravelTracing\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "EricPridham\\LaravelTracing\\ServiceProvider"
+            ]
+        }
+    }
+}
