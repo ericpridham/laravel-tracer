@@ -29,11 +29,11 @@ class LaravelTracer
         $this->tracer->registerTransport($transport);
     }
 
-    public function start(Request $request): void
+    public function start(Request $request, $name = 'app'): void
     {
         GlobalTracer::set($this->tracer);
 
-        $this->rootScope = $this->tracer->startActiveSpan('app');
+        $this->rootScope = $this->tracer->startActiveSpan($name);
 
         $this->rootScope->getSpan()->setTag('request.host', $request->getHost());
         $this->rootScope->getSpan()->setTag('request.path', $request->path());
