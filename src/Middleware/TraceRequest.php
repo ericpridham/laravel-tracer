@@ -17,20 +17,15 @@ class TraceRequest
      */
     public function handle($request, Closure $next)
     {
-        $tracer = $this->app->make(LaravelTracer::class);
+        $tracer = app(LaravelTracer::class);
         $tracer->start($request);
-//
-//        register_shutdown_function(function () use () {
-//            $scope->close();
-//            $tracer->flush();
-//        });
 
         return $next($request);
     }
 
     public function terminate()
     {
-        $tracer = $this->app->make(LaravelTracer::class);
+        $tracer = app(LaravelTracer::class);
         $tracer->stop();
     }
 }

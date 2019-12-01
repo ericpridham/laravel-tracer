@@ -33,14 +33,14 @@ class LaravelTracer
     {
         GlobalTracer::set($this->tracer);
 
-        $scope = $this->tracer->startActiveSpan('app');
+        $this->rootScope = $this->tracer->startActiveSpan('app');
 
-        $scope->getSpan()->setTag('request.host', $request->getHost());
-        $scope->getSpan()->setTag('request.path', $request->path());
+        $this->rootScope->getSpan()->setTag('request.host', $request->getHost());
+        $this->rootScope->getSpan()->setTag('request.path', $request->path());
 
         if ($request->user()) {
-            $scope->getSpan()->setTag('app.userId', $request->user()->id);
-            $scope->getSpan()->setTag('app.userName', $request->user()->name);
+            $this->rootScope->getSpan()->setTag('app.userId', $request->user()->id);
+            $this->rootScope->getSpan()->setTag('app.userName', $request->user()->name);
         }
     }
 
