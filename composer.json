@@ -1,5 +1,5 @@
 {
-    "name": "ericpridham/laravel-tracing",
+    "name": "ericpridham/laravel-tracer",
     "description": "Easily instrument a Laravel project.",
     "type": "library",
     "authors": [
@@ -13,7 +13,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/ericpridham/opentracing-client"
+            "url": "https://github.com/ericpridham/opentracer-client"
         }
     ],
     "require": {
@@ -24,18 +24,18 @@
     },
     "autoload": {
         "psr-4": {
-            "EricPridham\\LaravelTracing\\": "src/"
+            "EricPridham\\LaravelTracer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EricPridham\\LaravelTracing\\Tests\\": "tests/"
+            "EricPridham\\LaravelTracer\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "EricPridham\\LaravelTracing\\ServiceProvider"
+                "EricPridham\\LaravelTracer\\ServiceProvider"
             ]
         }
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace EricPridham\LaravelTracing;
+namespace EricPridham\LaravelTracer;
 
-use EricPridham\LaravelTracing\Middleware\TraceRequest;
+use EricPridham\LaravelTracer\Middleware\TraceRequest;
 use Illuminate\Contracts\Http\Kernel;
 use OpenTracingClient\Transport\HoneycombClient;
 use OpenTracingClient\Transport\HoneycombTransport;

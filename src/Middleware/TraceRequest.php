@@ -1,7 +1,7 @@
 <?php
 
 
-namespace EricPridham\LaravelTracing\Middleware;
+namespace EricPridham\LaravelTracer\Middleware;
 
 use Closure;
 use OpenTracing\GlobalTracer;

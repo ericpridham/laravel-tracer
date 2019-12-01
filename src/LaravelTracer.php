@@ -1,6 +1,6 @@
 <?php
 
-namespace EricPridham\LaravelTracing;
+namespace EricPridham\LaravelTracer;
 
 use OpenTracingClient\Tracer;
 use OpenTracingClient\Transport\HoneycombClient;
