@@ -15,7 +15,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->mergeConfigFrom(self::CONFIG_FILE, 'laraveltracer');
         $this->app->singleton(LaravelTracer::class, function () {
-            $tracer = new LaravelTracer();
+            $tracer = new LaravelTracer($this->app);
 
             if (config('laraveltracer.rootName')) {
                 $tracer->setRootName(config('laraveltracer.rootName'));

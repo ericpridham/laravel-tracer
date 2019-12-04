@@ -2,8 +2,12 @@
 
 namespace EricPridham\LaravelTracer;
 
+use App\Listeners\TraceQuery;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Request;
 use OpenTracing\GlobalTracer;
+use OpenTracing\StartSpanOptions;
 use OpenTracingClient\Scope;
 use OpenTracingClient\Tracer;
 use OpenTracingClient\TransportInterface;
@@ -18,9 +22,14 @@ class LaravelTracer
      * @var Scope
      */
     private $rootScope;
+    /**
+     * @var Application
+     */
+    private $app;
 
-    public function __construct()
+    public function __construct(Application $app)
     {
+        $this->app = $app;
         $this->tracer = new Tracer();
         $this->rootName = 'app';
     }
@@ -37,6 +46,8 @@ class LaravelTracer
 
     public function start(Request $request): void
     {
+        $this->app['events']->listen(QueryExecuted::class, TraceQuery::class);
+
         GlobalTracer::set($this->tracer);
 
         $this->rootScope = $this->tracer->startActiveSpan($this->rootName);
@@ -48,6 +59,16 @@ class LaravelTracer
             $this->rootScope->getSpan()->setTag('app.userId', $request->user()->id);
             $this->rootScope->getSpan()->setTag('app.userName', $request->user()->name);
         }
+    }
+
+    /**
+     * @param string $name
+     * @param StartSpanOptions|array|null $options
+     * @return Scope
+     */
+    public function startActiveSpan(string $name, $options = null): Scope
+    {
+        return $this->tracer->startActiveSpan($name, $options);
     }
 
     public function stop()
